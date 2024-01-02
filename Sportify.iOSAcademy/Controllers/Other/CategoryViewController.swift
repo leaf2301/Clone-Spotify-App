@@ -16,7 +16,7 @@ class CategoryViewController: UIViewController {
         
         item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(140)), subitem: item, count: 2)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(250)), subitem: item, count: 2)
         item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         
         return NSCollectionLayoutSection(group: group)
@@ -50,6 +50,8 @@ class CategoryViewController: UIViewController {
                     self?.playlists = playlists
                     self?.collectionView.reloadData()
                 case .failure(let error):
+                    print(error)
+                    print("Wrong")
                     print(error.localizedDescription)
                 }
             }
@@ -75,5 +77,12 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
         
         return cell
 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let vc = PlaylistViewController(playlist: playlists[indexPath.item])
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
