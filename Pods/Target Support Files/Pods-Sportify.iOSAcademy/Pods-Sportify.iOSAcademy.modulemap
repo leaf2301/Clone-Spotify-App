@@ -1,0 +1,6 @@
+framework module Pods_Sportify_iOSAcademy {
+  umbrella header "Pods-Sportify.iOSAcademy-umbrella.h"
+
+  export *
+  module * { export * }
+}
